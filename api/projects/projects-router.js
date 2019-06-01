@@ -37,63 +37,63 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const dish = await Dishes.add(req.body);
-    res.status(201).json(dish);
+    const project = await Projects.add(req.body);
+    res.status(201).json(project);
   } catch (error) {
     // log error to database
     console.log(error);
     res.status(500).json({
-      message: "Error adding the dish"
+      message: "Error adding the project"
     });
   }
 });
 
 router.delete("/:id", async (req, res) => {
   try {
-    const count = await Dishes.remove(req.params.id);
+    const count = await Projects.remove(req.params.id);
     if (count > 0) {
-      res.status(200).json({ message: "The dish has been nuked" });
+      res.status(200).json({ message: "The project has been nuked" });
     } else {
-      res.status(404).json({ message: "The dish could not be found" });
+      res.status(404).json({ message: "The project could not be found" });
     }
   } catch (error) {
     // log error to database
     console.log(error);
     res.status(500).json({
-      message: "Error removing the dish"
+      message: "Error removing the project"
     });
   }
 });
 
 router.put("/:id", async (req, res) => {
   try {
-    const dish = await Dishes.update(req.params.id, req.body);
-    if (dish ) {
-      res.status(200).json(dish);
+    const project = await Projects.update(req.params.id, req.body);
+    if (project) {
+      res.status(200).json(project);
     } else {
-      res.status(404).json({ message: "The dish could not be found" });
+      res.status(404).json({ message: "The project could not be found" });
     }
   } catch (error) {
     // log error to database
     console.log(error);
     res.status(500).json({
-      message: "Error updating the dish"
+      message: "Error updating the project"
     });
   }
 });
 
 // an endpoint that returns all the recipes for a dish
 
-router.get("/:id/recipes", async (req, res) => {
+router.get("/:id/actions", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const recipes = await Dishes.findDishRecipes(id);
+    const actions = await Projects.findActionsProjects(id);
 
-    if (recipes.length) {
-      res.json(recipes);
+    if (actions.length) {
+      res.json(actions);
     } else {
-      res.status(404).json({ err: "no recipes for this dish" });
+      res.status(404).json({ err: "no actions for this project" });
     }
   } catch (err) {
     res.status(500).json({ err });

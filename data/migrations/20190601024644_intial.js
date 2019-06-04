@@ -26,7 +26,7 @@ exports.up = async function(knex) {
           .notNullable();
         tbl
           .boolean("completed")
-          .notNullable(); 
+          .notNullable(); ke
            
     });
 };
